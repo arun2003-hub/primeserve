@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../../src/api";
 
 const Homepage: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -44,7 +45,7 @@ const Homepage: React.FC = () => {
   // Fetch Onboarding Users Count (Total Users, Active Users & De-active Users)
   const fetchUserStats = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/admin/users");
+      const response = await fetch(`${API_URL}/api/admin/users`);
       const data = await response.json();
       
       if (data.success && data.users) {
@@ -67,7 +68,7 @@ const Homepage: React.FC = () => {
   // Fetch Admin Stats
   const fetchAdminStats = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/admins");
+      const response = await fetch(`${API_URL}/api/admins`);
       const data = await response.json();
       if (data.success && data.admins) {
         const admins = data.admins;
