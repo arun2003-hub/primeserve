@@ -9,13 +9,51 @@ const AdminLogin: React.FC = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
 
+  // const handleLogin = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setErrorMsg("");
+  //   setLoading(true);
+
+  //   try {
+  //     const response = await fetch("http://localhost:5000/api/admin/login", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ username: email, password }),
+  //     });
+
+  //     const data = await response.json();
+
+  //     if (response.ok && data.success) {
+        
+  //       localStorage.setItem("adminToken", data.token);
+  //       localStorage.setItem("adminUsername", data.admin.username);
+  //       localStorage.setItem("adminRole", data.admin.role);
+  //       navigate("/");
+  //     } else {
+  //       setErrorMsg(data.error || data.message || "Invalid username or password");
+  //     }
+  //   } catch (err) {
+  //     console.error("Login network error:", err);
+  //     setErrorMsg("Server connection failed. Make sure backend is running.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg("");
     setLoading(true);
 
+    // Intha line-ah add pannikonga (Render URL Netlify env-la irunthu eduthukkum)
+    const API_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
     try {
-      const response = await fetch("http://localhost:5000/api/admin/login", {
+      // Inga "http://localhost:5000" ku badhila `${API_URL}`-ah use pannanum
+      const response = await fetch(`${API_URL}/api/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,7 +64,6 @@ const AdminLogin: React.FC = () => {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        
         localStorage.setItem("adminToken", data.token);
         localStorage.setItem("adminUsername", data.admin.username);
         localStorage.setItem("adminRole", data.admin.role);
