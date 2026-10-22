@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../src/api";
 
 export default function ChangePassword() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -23,7 +24,7 @@ export default function ChangePassword() {
     setLoading(true);
 
     try {
-      // 🛑 LocalStorage-il username பல வழிகளில் தேடப்படுகிறது
+    
       const email = 
         localStorage.getItem("username") || 
         localStorage.getItem("user") || 
@@ -35,7 +36,7 @@ export default function ChangePassword() {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/user/change-password", {
+      const response = await fetch(`${API_URL}/api/user/change-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, currentPassword, newPassword }),

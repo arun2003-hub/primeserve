@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { API_URL } from "../src/api";
 
 export default function UserRegister() {
   const [formData, setFormData] = useState({
@@ -58,7 +59,7 @@ export default function UserRegister() {
 
     try {
       // Backend-ku request anuppi .env Email_URL moolama OTP send panrathu
-      const response = await fetch("http://localhost:5000/api/user/send-otp", {
+      const response = await fetch(`${API_URL}/api/user/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

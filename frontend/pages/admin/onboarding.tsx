@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import AddUserModal from "../../subfiles/adduser";
+import { API_URL } from "../../src/api";
 
 interface User {
   id: number;
@@ -26,7 +27,7 @@ export default function Onboarding() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/admin/users");
+      const response = await fetch(`${API_URL}/api/admin/users`);
       const data = await response.json();
       if (data.success) {
         setUsers(data.users);
@@ -41,7 +42,7 @@ export default function Onboarding() {
   // Status Change Handler (Activate / Reject / De-activate)
   const handleUpdateStatus = async (userId: number, newStatus: string) => {
     try {
-      const response = await fetch("http://localhost:5000/api/admin/users/status", {
+      const response = await fetch(`${API_URL}/api/admin/users/status`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, status: newStatus }),

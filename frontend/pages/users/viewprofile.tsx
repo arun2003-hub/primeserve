@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_URL } from "../../src/api";
 
 interface UserProfile {
   userName: string;
@@ -23,7 +24,7 @@ export default function ViewProfile() {
         
         console.log("Fetching profile for identifier:", userEmail);
 
-        const response = await fetch(`http://localhost:5000/api/user/profile?email=${encodeURIComponent(userEmail)}`, {
+        const response = await fetch(`${API_URL}/api/user/profile?email=${encodeURIComponent(userEmail)}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

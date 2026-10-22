@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AddGroupModal from "../../subfiles/addgroup";
 import SubgroupsSection from "../../subfiles/addSubgroup";
+import { API_URL } from "../../src/api";
 
 interface ApiGroup {
   id: number;
@@ -20,7 +21,7 @@ const ApiGroups: React.FC = () => {
 
   const fetchGroups = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/groups");
+      const response = await fetch(`${API_URL}/api/groups`);
       if (!response.ok) throw new Error("Failed to fetch groups");
       const data = await response.json();
       
@@ -70,7 +71,7 @@ const ApiGroups: React.FC = () => {
     if (!window.confirm("Are you sure you want to delete this group?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/groups/${groupId}`, {
+      const response = await fetch(`${API_URL}/api/groups/${groupId}`, {
         method: "DELETE",
       });
 

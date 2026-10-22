@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API_URL } from "../src/api";
 
 interface Subgroup {
   id: number;
@@ -25,7 +26,7 @@ export default function SubgroupsSection({ groupId }: SubgroupsSectionProps) {
 
   const fetchSubgroups = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/groups/${groupId}/subgroups`);
+      const response = await fetch(`${API_URL}/api/groups/${groupId}/subgroups`);
       if (!response.ok) throw new Error("Failed to fetch subgroups");
       const data = await response.json();
       setSubgroups(data.subgroups || []);
@@ -54,8 +55,8 @@ export default function SubgroupsSection({ groupId }: SubgroupsSectionProps) {
 
     try {
       const url = editingSubgroup
-        ? `http://localhost:5000/api/subgroups/${editingSubgroup.id}`
-        : `http://localhost:5000/api/groups/${groupId}/subgroups`;
+        ? `${API_URL}/api/subgroups/${editingSubgroup.id}`
+        : `${API_URL}/api/groups/${groupId}/subgroups`;
 
       const method = editingSubgroup ? "PUT" : "POST";
 
@@ -84,7 +85,7 @@ export default function SubgroupsSection({ groupId }: SubgroupsSectionProps) {
     if (!window.confirm("Are you sure you want to delete this subgroup?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/subgroups/${subId}`, {
+      const response = await fetch(`${API_URL}/api/subgroups/${subId}`, {
         method: "DELETE",
       });
 

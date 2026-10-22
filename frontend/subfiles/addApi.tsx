@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API_URL } from "../src/api";
 
 interface AddApiModalProps {
   isOpen: boolean;
@@ -44,7 +45,7 @@ export default function AddApiModal({ isOpen, onClose, onAddApi }: AddApiModalPr
 
   const fetchGroups = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/groups");
+      const response = await fetch(`${API_URL}/api/groups`);
       const data = await response.json();
       if (data.groups) {
         setGroups(data.groups);
@@ -64,7 +65,7 @@ export default function AddApiModal({ isOpen, onClose, onAddApi }: AddApiModalPr
     if (!selectedGroupObj) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/groups/${selectedGroupObj.id}/subgroups`);
+      const response = await fetch(`${API_URL}/api/groups/${selectedGroupObj.id}/subgroups`);
       const data = await response.json();
       
       if (data.subgroups && Array.isArray(data.subgroups)) {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API_URL } from "../src/api";
 
 interface AddUserModalProps {
   isOpen: boolean;
@@ -42,7 +43,7 @@ export default function AddUserModal({ isOpen, onClose, onUserAdded }: AddUserMo
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/admin/adduser", {
+      const response = await fetch(`${API_URL}/api/admin/adduser`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

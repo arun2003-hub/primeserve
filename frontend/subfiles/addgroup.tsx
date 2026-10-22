@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API_URL } from "../src/api";
 
 interface AddGroupModalProps {
   isOpen: boolean;
@@ -30,8 +31,8 @@ export default function AddGroupModal({ isOpen, onClose, onGroupAdded, initialDa
 
     try {
       const url = initialData?.id 
-        ? `http://localhost:5000/api/groups/${initialData.id}`
-        : "http://localhost:5000/api/add-group";
+        ? `${API_URL}/api/groups/${initialData.id}`
+        : `${API_URL}/api/add-group`;
       
       const method = initialData?.id ? "PUT" : "POST";
 
