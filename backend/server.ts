@@ -29,6 +29,10 @@ app.use('/api', viewProfileRoutes);
 app.use('/api', onboardingUsersRouter);
 app.use('/api', addUserRouter); 
 
+app.get('/', (req, res) => {
+  res.send('Primeserve Backend is running successfully!');
+});
+
 // Server initialization and starting function
 const startServer = async () => {
   await initializeDatabase(); 
